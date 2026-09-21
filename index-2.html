@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Student Activity Dashboard</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <div class="page">
+
+    <!-- HEADER -->
+    <header class="header">
+      <div>
+        <h1>Student Activity Dashboard</h1>
+        <p class="subtitle">Track who's active, who isn't, and everyone in between.</p>
+      </div>
+      <button id="darkModeToggle" class="toggle-btn" type="button">🌙 Dark mode</button>
+    </header>
+
+    <!-- STATS -->
+    <section class="stats" id="stats">
+      <div class="stat-card">
+        <span class="stat-number" id="totalCount">0</span>
+        <span class="stat-label">Total</span>
+      </div>
+      <div class="stat-card stat-active">
+        <span class="stat-number" id="activeCount">0</span>
+        <span class="stat-label">Active</span>
+      </div>
+      <div class="stat-card stat-inactive">
+        <span class="stat-number" id="inactiveCount">0</span>
+        <span class="stat-label">Inactive</span>
+      </div>
+    </section>
+
+    <!-- ADD STUDENT FORM -->
+    <section class="panel">
+      <h2>Add a student</h2>
+      <form id="studentForm" class="student-form">
+        <input
+          type="text"
+          id="studentName"
+          placeholder="Student name"
+          autocomplete="off"
+          required
+        />
+        <select id="studentStatus">
+          <option value="active">Active</option>
+          <option value="inactive">Inactive</option>
+        </select>
+        <button type="submit">Add student</button>
+      </form>
+    </section>
+
+    <!-- SEARCH + FILTER CONTROLS -->
+    <section class="controls">
+      <input
+        type="text"
+        id="searchInput"
+        class="search-input"
+        placeholder="Search students by name..."
+      />
+      <div class="filter-buttons" id="filterButtons">
+        <button class="filter-btn active" data-filter="all" type="button">All</button>
+        <button class="filter-btn" data-filter="active" type="button">Active</button>
+        <button class="filter-btn" data-filter="inactive" type="button">Inactive</button>
+      </div>
+    </section>
+
+    <!-- STUDENT LIST -->
+    <section class="panel">
+      <h2>Students</h2>
+      <div id="studentList" class="student-list">
+        <!-- Student cards are created dynamically by script.js -->
+      </div>
+      <p id="emptyState" class="empty-state hidden">No students match this view.</p>
+    </section>
+
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
