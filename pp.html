@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Student Activity Dashboard</title>
+
+  <!-- Relative paths so the site works on GitHub Pages, Vercel, Netlify, etc. -->
+  <link rel="stylesheet" href="pp.css">
+</head>
+<body>
+
+  <!-- ============ PAGE HEADER ============ -->
+  <header class="page-header">
+    <div class="header-text">
+      <h1>Student Activity Dashboard</h1>
+      <p class="header-description">
+        Use this dashboard to manage student activities: add students,
+        search them, change their status, and remove them.
+      </p>
+    </div>
+
+    <!-- Toggles dark mode (behavior is added in script.js) -->
+    <button type="button" id="themeToggle" class="theme-toggle" aria-pressed="false">
+      <span id="themeIcon" aria-hidden="true">🌙</span>
+      <span id="themeLabel">Dark Mode</span>
+    </button>
+  </header>
+
+  <main class="dashboard">
+
+    <!-- ============ STATS CARDS ============ -->
+    <!-- Numbers are filled in by JavaScript from the students array -->
+    <section class="stats" aria-label="Student statistics">
+      <article class="stat-card stat-total">
+        <h2 class="stat-label">Total Students</h2>
+        <p class="stat-value" id="totalCount">0</p>
+      </article>
+
+      <article class="stat-card stat-active">
+        <h2 class="stat-label">Active Students</h2>
+        <p class="stat-value" id="activeCount">0</p>
+      </article>
+
+      <article class="stat-card stat-inactive">
+        <h2 class="stat-label">Inactive Students</h2>
+        <p class="stat-value" id="inactiveCount">0</p>
+      </article>
+    </section>
+
+    <!-- ============ ADD STUDENT FORM ============ -->
+    <section class="card form-card" aria-labelledby="addStudentHeading">
+      <h2 id="addStudentHeading">Add a New Student</h2>
+
+      <form id="studentForm" class="student-form" novalidate>
+        <div class="form-grid">
+
+          <div class="form-group">
+            <label for="studentName">Student Name</label>
+            <input type="text" id="studentName" name="studentName"
+                   placeholder="e.g. John Doe" autocomplete="off" required>
+          </div>
+
+          <div class="form-group">
+            <label for="studentId">Student ID</label>
+            <input type="text" id="studentId" name="studentId"
+                   placeholder="e.g. CSE-101" autocomplete="off" required>
+          </div>
+
+          <div class="form-group">
+            <label for="studentDepartment">Department</label>
+            <input type="text" id="studentDepartment" name="studentDepartment"
+                   placeholder="e.g. CSE" autocomplete="off" required>
+          </div>
+
+          <div class="form-group">
+            <label for="studentStatus">Status</label>
+            <select id="studentStatus" name="studentStatus">
+              <option value="Active" selected>Active</option>
+              <option value="Inactive">Inactive</option>
+            </select>
+          </div>
+
+        </div>
+
+        <!-- Shows validation messages (e.g. empty fields or duplicate ID) -->
+        <p id="formError" class="form-error" role="alert" hidden></p>
+
+        <button type="submit" id="addStudentBtn" class="btn btn-primary">+ Add Student</button>
+      </form>
+    </section>
+
+    <!-- ============ STUDENTS LIST ============ -->
+    <section class="card students-card" aria-labelledby="studentsHeading">
+      <div class="students-toolbar">
+        <h2 id="studentsHeading">Students</h2>
+
+        <div class="toolbar-controls">
+          <!-- Search -->
+          <label for="searchInput" class="visually-hidden">Search students by name or ID</label>
+          <input type="search" id="searchInput" class="search-input"
+                 placeholder="Search by name or ID..." autocomplete="off">
+
+          <!-- Filter buttons: JS reads data-filter and toggles the "active" class -->
+          <div class="filter-group" role="group" aria-label="Filter students by status">
+            <button type="button" class="filter-btn active" data-filter="all" aria-pressed="true">All</button>
+            <button type="button" class="filter-btn" data-filter="Active" aria-pressed="false">Active</button>
+            <button type="button" class="filter-btn" data-filter="Inactive" aria-pressed="false">Inactive</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Student cards are generated here by JavaScript -->
+      <ul id="studentList" class="student-list" aria-live="polite"></ul>
+
+      <!-- Shown by JS when there are no students (or none match the search/filter) -->
+      <div id="emptyState" class="empty-state">
+        <p class="empty-title">No students added yet.</p>
+        <p class="empty-text">Add your first student using the form above.</p>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ============ NOTIFICATION (success / error messages) ============ -->
+  <div id="notification" class="notification hidden" role="status" aria-live="polite"></div>
+
+  <!-- ============ FOOTER ============ -->
+  <footer class="page-footer">
+    <p>Built with plain HTML, CSS and JavaScript to practice DOM manipulation.</p>
+  </footer>
+
+  <script src="pp.js"></script>
+</body>
+</html>
